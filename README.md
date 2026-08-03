@@ -103,7 +103,7 @@ Magpie test-runner clients.
 | `/log/?grade=FAIL,NA`        | Log filtered by grade (prefix with `!` to invert)|
 | `/search/`                   | Search for a distribution                        |
 
-Append `?json=1` to any page for JSON output, or `?debug=1` for Krumo debug output.
+Append `?json=1` to any page for JSON output.
 
 ### JSON-RPC API
 
@@ -111,13 +111,3 @@ The API lives at `/api/json-rpc/`. Available methods:
 
 - `dist.add_test($test_epoch, $test_uuid, $dist_name, $dist_version, $tester_name, $grade, $perl_version, $os_name, $os_version, $test_body)` — submit a test result
 - `dist.get_test($uuid)` — fetch test metadata by UUID
-- `echo_data(...)` / `math.pi()` — examples
-
-Example submission (from the Perl client):
-
-```
-jsonrpc-client.pl --url https://perl-magpie.org/api/json-rpc/ --method dist.add_test \
-  --params "1768521720,3d07c2b3-...,Acme-Foo,v0.45,Scott Baker,PASS,v5.4.32,Linux,x86_64,Test Body"
-```
-
-On success `dist.add_test` returns the URL of the new result page.
