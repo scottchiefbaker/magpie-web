@@ -35,6 +35,26 @@ foreach ($extensions as $ext) {
 
 //////////////////////////////////////////////////////////////////////////
 
+$sluz_file = "$BASE_DIR/include/sluz/sluz.class.php";
+if (is_readable($sluz_file)) {
+	require($sluz_file);
+	$s = new sluz();
+
+	$checks[] = [
+		'name'   => 'Sluz template engine',
+		'status' => 'ok',
+		'detail' => 'version ' . $s->version,
+	];
+} else {
+	$checks[] = [
+		'name'   => 'Sluz template engine',
+		'status' => 'fail',
+		'detail' => 'include/sluz/sluz.class.php missing or unreadable',
+	];
+}
+
+//////////////////////////////////////////////////////////////////////////
+
 if (function_exists('apache_get_modules')) {
 	$mods    = apache_get_modules();
 	$rewrite = in_array('mod_rewrite', $mods);
