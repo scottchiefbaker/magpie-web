@@ -100,7 +100,7 @@ function get_test_info($uuid) {
 
 	$ret = $dbq->query($sql, [$uuid], 'one_row');
 	if (!$ret) {
-		error_out("Unable to find distribution for <code>$uuid</code>", 45328);
+		error_out("Unable to find distribution for $uuid", 45328);
 	}
 
 	$raw = $ret['txt_zstd'] ?? null;
@@ -109,7 +109,7 @@ function get_test_info($uuid) {
 	if ($raw) {
 		$dict_file = "include/zstd-dict/" . $ret['dict_file'];
 		if (!is_readable($dict_file)) {
-			error_out("Unable to read zstd dictionary <code>$dict_file</code>", 95357);
+			error_out("Unable to read zstd dictionary $dict_file", 95357);
 		}
 
 		$zst  = @stream_get_contents($raw);
@@ -135,7 +135,7 @@ function get_test_info($uuid) {
 			// Save the test to the DB
 			write_test_to_db($uuid, $txt_body, $ret);
 		} else {
-			error_out("Test <code>$uuid</code> not cached locally, and we are unable to fetch it from <code>api.cpantesters.org</code>.", 57202);
+			error_out("Test $uuid not cached locally, and we are unable to fetch it from api.cpantesters.org.", 57202);
 		}
 	}
 

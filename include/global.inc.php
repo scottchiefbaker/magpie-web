@@ -36,7 +36,7 @@ function db_init() {
 	$ini_file = "$BASE_DIR/include/magpie.config.ini";
 
 	if (!is_readable($ini_file)) {
-		error_out("Unable to read DB credentials from <code>$ini_file</code>", 98573);
+		error_out("Unable to read DB credentials from $ini_file", 98573);
 	}
 
 	$x   = parse_ini_file($ini_file, true);
