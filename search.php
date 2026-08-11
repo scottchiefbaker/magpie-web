@@ -76,7 +76,14 @@ function filter_results($all, $filter) {
 }
 
 function highlight_results($input, $filter = "ran") {
-	$ret = preg_replace("/($filter)/i", "<span class=\"search_highlight\">$1</span>", $input);
+	// Escape each entry first so only our span below is HTML
+	$escaped = [];
+	foreach ($input as $name) {
+		$escaped[] = htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+	}
+
+	$filter = preg_quote($filter);
+	$ret = preg_replace("/($filter)/i", "<span class=\"search_highlight\">$1</span>", $escaped);
 
 	return $ret;
 }
