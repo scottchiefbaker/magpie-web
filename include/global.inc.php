@@ -55,7 +55,7 @@ function hello_world() {
 
 function send_json($hash) {
 	header('Content-type: application/json');
-	$json = json_encode($hash);
+	$json = json_encode($hash, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
 
 	print $json;
 	exit(0);
