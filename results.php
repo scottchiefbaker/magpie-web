@@ -49,6 +49,9 @@ print $s->fetch("tpls/results.stpl");
 // otherwise these can get pretty slow as we're parsing 8k of text for each one.
 // As of 2025-03-31 I can parse a test output in about 4ms with the 11 rules that are in place.
 function highlight_report(string $test_body) {
+	// Escape the body first so only our spans below are HTML
+	$test_body = htmlspecialchars($test_body, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+
 	// Green/success
 	$test_body = preg_replace("/\b(Result: PASS)\b/","<span class=\"status_pass\">$1</span>", $test_body);
 	$test_body = preg_replace("/^(All tests successful\.)$/m","<span class=\"status_pass\">$1</span>", $test_body);
