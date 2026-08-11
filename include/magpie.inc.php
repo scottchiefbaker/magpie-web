@@ -17,6 +17,10 @@ $s->setEscapeHtml(true);
 ////////////////////////////////////////////////////////////////////////////////
 require("$BASE_DIR/include/global.inc.php");
 $dbq = db_init();
+
+if (isset($_GET['debug']) && !is_admin()) {
+	unset($_GET['debug']);
+}
 ////////////////////////////////////////////////////////////////////////////////
 $mc  = new Memcached();
 $mc->addServer('127.0.0.1', 11211);

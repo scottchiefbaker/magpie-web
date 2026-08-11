@@ -31,15 +31,30 @@ function teapot() {
 	die;
 }
 
-function db_init() {
-	global $BASE_DIR;
-	$ini_file = "$BASE_DIR/include/magpie.config.ini";
+function get_config() {
+	static $config = null;
 
-	if (!is_readable($ini_file)) {
-		error_out("Unable to read DB credentials from $ini_file", 98573);
+	if ($config === null) {
+		$ini_file = $GLOBALS['BASE_DIR'] . "/include/magpie.config.ini";
+
+		if (is_readable($ini_file)) {
+			$config = parse_ini_file($ini_file, true);
+		} else {
+			$config = [];
+		}
 	}
 
-	$x   = parse_ini_file($ini_file, true);
+	return $config;
+}
+
+function db_init() {
+	global $BASE_DIR;
+
+	$x = get_config();
+	if (!$x) {
+		error_out("Unable to read DB credentials from $BASE_DIR/include/magpie.config.ini", 98573);
+	}
+
 	$dsn = "pgsql:host={$x['db']['host']};port={$x['db']['port']};dbname={$x['db']['dbname']}";
 	$dbq = new DBQuery($dsn, $x['db']['username'], $x['db']['password']);
 
@@ -210,10 +225,14 @@ function run_cmd($cmd) {
 
 function is_admin() {
 	$ip = $_SERVER['REMOTE_ADDR'] ?? "";
-	if ($ip === '67.22.241.17') {
+
+	if ($ip === '127.0.0.1' || $ip === '::1') {
 		$ret = true;
 	} else {
-		$ret = false;
+		$x        = get_config();
+		$admin_ip = trim($x['security']['admin_ip'] ?? "");
+
+		$ret = ($ip === $admin_ip);
 	}
 
 	return $ret;
