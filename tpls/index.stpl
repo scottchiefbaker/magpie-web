@@ -8,7 +8,7 @@
 		<link href="/css/dist.css" rel="stylesheet">
 	</head>
 	<body class="">
-		{$debug_output}
+		{$debug_output|raw}
 
 		<h1 class="border-bottom mx-0 px-3 magpie_header pb-2 mb-3">Perl-Magpie Dashboard</h1>
 
@@ -98,6 +98,6 @@
 			</div>
 		</div>
 
-		{if $query_summary}<div class="p-3">{$query_summary}</div>{/if}
+		{if $query_summary}<div class="p-3">{$query_summary|raw}</div>{/if}
 	</body>
 </html>

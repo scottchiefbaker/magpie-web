@@ -9,7 +9,7 @@
 
 	</head>
 	<body class="">
-		{$debug_output}
+		{$debug_output|raw}
 
 		<h1 class="border-bottom mx-0 px-3 magpie_header pb-2 mb-3">Perl-Magpie.org</h1>
 

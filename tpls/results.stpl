@@ -10,7 +10,7 @@
 		<script type="text/javascript" src="/js/jquery.min.js"></script>
 	</head>
 	<body class="">
-		{$debug_output}
+		{$debug_output|raw}
 
 		<h1 class="border-bottom mx-0 px-3 magpie_header pb-2 mb-3 row">
 			<div class="col-11 ps-0">
@@ -48,7 +48,7 @@
 			</table>
 
 			{if $cached}<div class="alert alert-success fw-bold p-2">Test body is cached</div>{/if}
-			<pre class="border bg-light p-2 font-scp">{$info.text_report|highlight_report}</pre>
+			<pre class="border bg-light p-2 font-scp">{$info.text_report|highlight_report|raw}</pre>
 		</div>
 	</body>
 </html>

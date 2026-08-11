@@ -7,7 +7,7 @@
 		<link href="/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	</head>
 	<body class="">
-		{$debug_output}
+		{$debug_output|raw}
 
 		<h1 class="border-bottom mx-0 px-3 bg-primary-subtle pb-2 mb-3">Skel</h1>
 	</body>
