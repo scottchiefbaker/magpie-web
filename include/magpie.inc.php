@@ -23,6 +23,7 @@ $s->setEscapeHtml(true);
 ////////////////////////////////////////////////////////////////////////////////
 require("$BASE_DIR/include/global.inc.php");
 $dbq = db_init();
+require("$BASE_DIR/include/magpie.class.php");
 
 if (isset($_GET['debug']) && !is_admin()) {
 	unset($_GET['debug']);
@@ -35,6 +36,7 @@ $mc->addServer('127.0.0.1', 11211);
 // data set()'s
 $mc->setOption(Memcached::OPT_COMPRESSION, false);
 ////////////////////////////////////////////////////////////////////////////////
+$magpie = new Magpie($dbq, $mc);
 require("$BASE_DIR/bot-rate-limit.php");
 ////////////////////////////////////////////////////////////////////////////////
 openlog("MagpieWeb", LOG_PID | LOG_PERROR, LOG_LOCAL7);
