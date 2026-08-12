@@ -135,7 +135,7 @@ function get_test_info($uuid) {
 			// Save the test to the DB
 			write_test_to_db($uuid, $txt_body, $ret);
 		} else {
-			error_out("Test $uuid not cached locally, and we are unable to fetch it from api.cpantesters.org.", 57202);
+			error_out("Test $uuid not cached locally, and we are unable to fetch it from collector.cpantesters.org.", 57202);
 		}
 	}
 
@@ -183,7 +183,7 @@ function http_get_with_timeout(string $url, int $timeout, &$curl_errno, &$http_c
 // Fetch test information via API
 function fetch_test_info_from_cpt($uuid) {
 	$start = microtime(1);
-	$url   = "http://api.cpantesters.org/v3/report/$uuid";
+	$url   = "https://collector.cpantesters.org/v1/report/$uuid";
 	$ckey  = "cptraw:$uuid";
 
 	if ($data = $GLOBALS['mc']->get($ckey)) {
@@ -194,7 +194,7 @@ function fetch_test_info_from_cpt($uuid) {
 	$curl_errno = 0;
 	$http_code  = 0;
 
-	$json = http_get_with_timeout($url, 2, $curl_errno, $http_code);
+	$json = http_get_with_timeout($url, 3, $curl_errno, $http_code);
 	$ms   = intval((microtime(1) - $start) * 1000);
 	$ret  = @json_decode($json, true);
 
