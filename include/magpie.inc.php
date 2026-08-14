@@ -10,7 +10,7 @@ $ZSTD_DICT = "$BASE_DIR/include/zstd-dict/magpie-dict-2025";
 // Security headers. The CSP blocks injected scripts even if an XSS slips
 // through; style-src 'unsafe-inline' is required by the Bootstrap utility
 // style="" attributes. nosniff stops browsers from MIME-sniffing responses.
-header("Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'");
+header("Content-Security-Policy: style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'");
 header("X-Content-Type-Options: nosniff");
 ////////////////////////////////////////////////////////////////////////////////
 require("$BASE_DIR/include/krumo/class.krumo.php");
